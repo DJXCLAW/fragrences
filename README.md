@@ -1,78 +1,33 @@
 # Fragrance Atlas
 
-**Find your uncommon.** A responsive fragrance-discovery launch page built from the 72-fragrance Fragrance Atlas workbook.
+A complete, standalone fragrance discovery website prepared for DJXCLAW/fragrences. The editorial design now supports 172 fragrances. The original 72 records, 40 seasonal picks, source links, and embedded workbook are preserved, with 100 new additions across value, designer, niche, and ultra-niche categories.
 
-## Preview on your computer
+## Local preview
 
-Download this repository as a ZIP and extract it, then double-click `preview.html`. It is a self-contained preview with the styles, code, fragrance data, and workbook download embedded. On Windows, `START_PREVIEW.bat` opens the modular `index.html` instead.
+Open index.html in your browser, or run `npm start` and visit http://localhost:4173/fragrences/. No dependency installation or build step is needed. Run `npm test` for data and JavaScript checks.
 
-For a localhost preview, install Node.js 18 or newer, open a terminal in this folder, and run:
+## What changed
 
-```sh
-npm start
-```
+- Visible Save buttons on fragrance cards and a live shortlist count.
+- Clear empty-state instructions, simple fragrance summaries, and direct comparison of two or three selections inside the shortlist.
+- Optional testing notes, progress, ratings, and observed duration tucked into expandable sections.
+- Browser-local saving and CSV export without sample quote, cost, quantity, size, subtotal, or sample-budget fields.
+- Avant-Garde Edit and Originality throughout visible website copy. Original dataset field names and the original downloadable workbook are retained for compatibility and provenance.
+- 100 additional profiles with honest “price not researched” labels. No current prices were invented; verify size, concentration, availability, and price before buying.
 
-Open **http://localhost:4173**. No `npm install` step is needed. The server binds only to `127.0.0.1`; press Ctrl+C to stop it.
+Existing saved IDs, trial notes, progress, ratings, and observed hours are read from the original storage key. Old sample costs are ignored and omitted on the next save. Local previews and hosted sites have separate browser storage; export a backup before changing origin.
 
-## What is included
+## Publish to DJXCLAW/fragrences
 
-- All 72 fragrance profiles, recorded bottle sizes and concentrations, reference prices, source links, notes, and performance caveats.
-- Search, category/price/season/night/longevity/projection filters, sorting, progressive loading, and comparison of up to three fragrances.
-- Forty seasonal and nighttime picks and 21 Weird Lab profiles.
-- A three-question, rules-based scent finder.
-- A browser-local sample shortlist with budget tracking, trial notes, personal ratings, and CSV export.
-- Responsive layouts, keyboard-accessible controls, dialog focus management, reduced-motion support, and print styles.
-- The original spreadsheet content and a JSON dataset export.
+1. Copy this folder's contents to the repository root on the publishing branch. The website only requires index.html and .nojekyll; the other files support local previews and validation.
+2. The repository inspected at commit 3a34ec32efe3e07f121882a096dc5bf084d3ef9c contains an unfinished transfer import and no root site. This complete package supersedes that import. Do not run the old Import Fragrance Atlas workflow or create transfer/ready.json to restore the older site. The old workflow and transfer directory may be removed as a separate cleanup.
+3. In repository Settings → Pages, choose Deploy from a branch, select the publishing branch and /(root), and save.
+4. After Pages reports success, verify https://djxclaw.github.io/fragrences/ on desktop and mobile.
 
-## Source data and limitations
+No custom domain is needed. This delivery prepares the site; it does not push commits or enable public hosting.
 
-The source workbook is `downloads/Fragrance_Atlas_72_Colognes.xlsx`. Its research snapshot is **September 19, 2026**. The site converts that dataset; it does not independently re-research the recorded product claims.
+Prices remain the September 19, 2026 research snapshot, not current offers. Performance and originality scores remain editorial estimates. No accounts, analytics, checkout, backend, or external assets are required.
 
-Prices are archived reference quotes, not live retail offers, sample prices, or lowest-price claims. A quote belongs to its listed bottle size and concentration. Missing USD quotes remain missing; foreign-currency quotes are not silently converted.
 
-Longevity, projection, seasonal fits, everyday ease, weirdness, plain-language profiles, and drydowns retain the workbook's editorial caveats. They are not controlled measurements, verified averages, firsthand wear tests, or guarantees. Notes are scent vocabulary, not complete ingredient lists. Body-fluid and fuel descriptions represent artistic concepts rather than proof of literal ingredients.
 
-Bottle illustrations are original CSS artwork, not the brands' real packaging. Brand names identify the fragrances discussed. Fragrance Atlas is a working project title, not a trademark-clearance claim.
 
-## Privacy and commerce
-
-There is no backend, sign-in, email collection, analytics, payment processing, checkout, or affiliate tracking. Shortlists stay in the visitor's browser when local storage is available. Private browsing, file URLs, clearing browser data, or changing the site origin can affect saved items; export CSV to keep a backup.
-
-This is a discovery guide, not a fragrance retailer. Outbound links lead to the source pages recorded in the workbook, where prices and availability may have changed.
-
-## Files and editing
-
-```text
-index.html                     Modular page for static hosting
-preview.html                   Self-contained local preview
-assets/styles.css              Styling and bottle illustrations
-assets/app.js                  Search, comparison, finder, and planner
-assets/data.js                 Fragrance data, loaded without fetch
- downloads/fragrances.json      Readable dataset export
- downloads/Fragrance_Atlas_72_Colognes.xlsx
-server.cjs                     Dependency-free localhost server
-package.json                   npm start / npm run check
-START_PREVIEW.bat               Windows open-in-browser helper
-.nojekyll                      GitHub Pages static-site marker
-QA.md                          Original validation scope and limitations
-```
-
-Keep `index.html`, `assets`, and `downloads` together. Edit copy in `index.html`, styling in `assets/styles.css`, and behavior in `assets/app.js`. Keep the JSON export synchronized with `assets/data.js`. The standalone preview is a generated snapshot and needs rebuilding after changes.
-
-Run syntax checks with:
-
-```sh
-npm run check
-```
-
-## GitHub Pages
-
-The repository is **DJXCLAW/fragrences**. To publish the static site, open **Settings > Pages > Build and deployment**, select **Deploy from a branch**, choose **main** and **/(root)**, and save.
-
-Once GitHub Pages reports a successful deployment, the expected project URL is:
-
-**https://djxclaw.github.io/fragrences/**
-
-Committing the source is separate from enabling Pages. The expected address is not a claim that deployment has completed.
-
-GitHub documentation: https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site
