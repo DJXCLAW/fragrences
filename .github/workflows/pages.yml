@@ -25,7 +25,7 @@ jobs:
       - name: Prepare static site
         run: |
           mkdir -p _site
-          cp index.html .nojekyll _site/
+          cp index.html affiliate-config.js .nojekyll _site/
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
       - name: Upload GitHub Pages artifact
