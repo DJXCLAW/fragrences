@@ -3,7 +3,17 @@ name: Deploy Fragrance Atlas to GitHub Pages
 on:
   push:
     branches: [main]
+    paths:
+      - 'index.html'
+      - 'affiliate-config.js'
+      - 'CNAME'
+      - '.nojekyll'
+      - '.github/workflows/pages.yml'
   workflow_dispatch:
+  workflow_run:
+    workflows: ['Sync fragrance house catalogs']
+    types: [completed]
+    branches: [main]
 
 permissions:
   contents: read
@@ -12,20 +22,25 @@ permissions:
 
 concurrency:
   group: pages
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   verify:
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     steps:
-      - name: Check out repository
+      - name: Check out the latest published catalog commit
         uses: actions/checkout@v6
+        with:
+          ref: main
       - name: Verify site data and scripts
         run: node verify.cjs
       - name: Prepare static site
         run: |
           mkdir -p _site
           cp index.html affiliate-config.js .nojekyll _site/
+          if [ -f CNAME ]; then cp CNAME _site/; fi
+          if [ -f brand-catalog.json ]; then cp brand-catalog.json _site/; fi
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
       - name: Upload GitHub Pages artifact
@@ -43,4 +58,3 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-
